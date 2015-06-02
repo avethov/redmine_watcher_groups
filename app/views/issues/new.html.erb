@@ -41,7 +41,7 @@
 
       <p id="watchers_groups_form"><label><%= l(:label_issue_watcher_groups) %></label>
         <span>
-          <%= watcher_groups_checkboxes(@issue, Group.all) %>
+          <%= watcher_groups_checkboxes(@issue, Group.sorted.all) %>
         </span>
       </p>
     <% end %>
