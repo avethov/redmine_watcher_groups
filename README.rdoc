@@ -1,4 +1,4 @@
-= Redmine Watcher Groups
+= Redmine Watcher Groups for Redmine 3.x.x
 
 Plugin for Redmine that adds functionality to have Watcher Groups in addition to Watchers.
 
