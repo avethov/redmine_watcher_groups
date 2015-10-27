@@ -50,6 +50,7 @@ module WatcherGroupsHelper
                   :class => "floating"
     end.join.html_safe
   end
+  
   def watchers_list(object)
     remove_allowed = User.current.allowed_to?("delete_#{object.class.name.underscore}_watchers".to_sym, object.project)
     content = ''.html_safe

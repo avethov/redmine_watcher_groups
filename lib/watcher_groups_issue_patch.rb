@@ -21,8 +21,9 @@ module WatcherGroupsIssuePatch
 
     def watcher_groups
       if self.id
-        groups = Watcher.find(:all, :conditions => "watchable_type='#{self.class}' and watchable_id = #{self.id}")
-        Group.find_all_by_id(groups.map(&:user_id))
+        groups = Watcher.where("watchable_type='#{self.class}' and watchable_id = #{self.id}")
+        return [] if groups.empty?  
+        Group.where(id: groups.map(&:user_id))
       end
     end
 
@@ -51,9 +52,7 @@ module WatcherGroupsIssuePatch
 
     # Adds group as a watcher
     def add_watcher_group(group)
-      if Watcher.find(:all, 
-         :conditions => "watchable_type='#{self.class}' and watchable_id = #{self.id} and user_id = '#{group.id}'",
-         :limit => 1).blank?
+      if Watcher.where("watchable_type='#{self.class}' and watchable_id = #{self.id} and user_id = '#{group.id}'").limit(1).blank?
         # insert directly into table to avoid user type checking
         Watcher.connection.execute("INSERT INTO #{Watcher.table_name} (user_id, watchable_id, watchable_type) VALUES (#{group.id}, #{self.id}, '#{self.class.name}')")
       end
@@ -80,19 +79,19 @@ module WatcherGroupsIssuePatch
   module InstanceMethods
     def notified_watchers_with_groups
       notified = []
-
-      w = Watcher.find(:all, :conditions => "watchable_type='#{self.class}' and watchable_id = #{self.id}")
-      groups = Group.find_all_by_id(w.map(&:user_id))
+      w = Watcher.where("watchable_type='#{self.class}' and watchable_id = #{self.id}")
+      groups = Group.where(id: w.map(&:user_id))
 
       groups.each do |p|
-          group_users = p.users
+          group_users = p.users.to_a
           group_users.reject! {|user| user.mail.blank? || user.mail_notification == 'none'}
           if respond_to?(:visible?)
             group_users.reject! {|user| !visible?(user)}
           end
           notified += group_users
       end
-      notified += watcher_users
+
+      notified += watcher_users.to_a
       notified.reject! {|user| user.mail.blank? || user.mail_notification == 'none'}
       if respond_to?(:visible?)
         notified.reject! {|user| !visible?(user)}
