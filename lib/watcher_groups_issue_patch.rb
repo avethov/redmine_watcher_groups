@@ -88,7 +88,7 @@ module WatcherGroupsIssuePatch
           if respond_to?(:visible?)
             group_users.reject! {|user| !visible?(user)}
           end
-          notified += group_users
+          notified |= group_users
       end
 
       notified += watcher_users.to_a
@@ -96,7 +96,7 @@ module WatcherGroupsIssuePatch
       if respond_to?(:visible?)
         notified.reject! {|user| !visible?(user)}
       end
-      notified.uniq
+      notified
     end
 
     def watched_by_with_groups?(user)
@@ -109,9 +109,9 @@ module WatcherGroupsIssuePatch
     def watcher_users_with_users
       users = watcher_users_without_users
       watcher_groups.each do |g|
-        users += g.users
+        users |= g.users
       end if self.id?
-      users.uniq
+      users
     end
   end
 end
