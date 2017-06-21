@@ -91,7 +91,7 @@ module WatcherGroupsIssuePatch
           notified |= group_users
       end
 
-      notified += watcher_users.to_a
+      notified |= watcher_users.to_a
       notified.reject! {|user| user.mail.blank? || user.mail_notification == 'none'}
       if respond_to?(:visible?)
         notified.reject! {|user| !visible?(user)}
@@ -108,9 +108,11 @@ module WatcherGroupsIssuePatch
 
     def watcher_users_with_users
       users = watcher_users_without_users
+      old_object = users
       watcher_groups.each do |g|
         users |= g.users
       end if self.id?
+      users.define_singleton_method(:reset) do old_object.reset end
       users
     end
   end
