@@ -109,12 +109,10 @@ module WatcherGroupsIssuePatch
     def watcher_users_with_users
       users = watcher_users_without_users
       old_object = users
-      logger.info("WATCHER : Users before modification : #{old_object.class}")
       watcher_groups.each do |g|
         users |= g.users
       end if self.id?
       users.define_singleton_method(:reset) do old_object.reset end if old_object.class != users.class
-      logger.info("WATCHER : Users after modification : #{users.class}")
       users
     end
   end
