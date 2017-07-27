@@ -66,7 +66,7 @@ class WatcherGroupsController < ApplicationController
   end
 
   def autocomplete_for_group
-    @groups = Group.active.like(params[:q]).find(:all, :limit => 100)
+    @groups = Group.sorted.active.like(params[:q]).limit(100)
     if @watched
       @groups -= @watched.watcher_groups
     end
