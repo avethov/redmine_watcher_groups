@@ -1,0 +1,10 @@
+<p>
+  <%= label_tag 'redmine_watcher_groups_log_watchers_setting', l(:label_watcher_change_setlog) %>
+  <%=
+    select_tag 'settings[redmine_watcher_groups_log_watchers_setting]', options_for_select([
+      [l(:general_text_No), 'no'],
+      [l(:general_text_Yes), 'yes'],
+    ], @settings['redmine_watcher_groups_log_watchers_setting'])  %>
+   <%=l(:label_authorchange_setlog_description) %>
+</p>
+
