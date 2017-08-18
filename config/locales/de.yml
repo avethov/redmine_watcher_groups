@@ -1,0 +1,5 @@
+# German strings go here for Rails i18n
+de:
+  my_label: "Meine Kennung"
+  label_issue_watcher_groups: "Beobachtergruppen"
+  label_group_search: "Suche nach Gruppe:"

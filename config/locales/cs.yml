@@ -1,4 +1,4 @@
-# English strings go here for Rails i18n
+# Czech strings go here for Rails i18n
 cs:
   label_issue_watcher_groups: "Sledováno skupinami"
   label_group_search: "Vyhledání skupiny:"
