@@ -7,6 +7,7 @@ module WatcherGroupsIssuePatch
       alias_method_chain :notified_watchers , :groups
       alias_method_chain :watched_by? , :groups
       alias_method_chain :watcher_users, :users
+      alias_method_chain :set_watcher, :journal
     end
   end
 
@@ -18,6 +19,11 @@ module WatcherGroupsIssuePatch
       g = user.groups
       joins(:watchers).where("#{Watcher.table_name}.user_id IN (#{user.id} #{g.empty? ? "" : ","} #{g.map(&:id).join(',')})")
     }
+
+    def add_watcher_journal(action, watcher_name)
+      journal = self.init_journal(User.current, l(action, :name => User.current.name, :target_name => watcher_name).html_safe)
+      journal.save
+    end
 
     def watcher_groups
       if self.id
@@ -114,6 +120,12 @@ module WatcherGroupsIssuePatch
       end if self.id?
       users.define_singleton_method(:reset) do old_object.reset end if old_object.class != users.class
       users
+    end
+
+    def set_watcher_with_journal(user, watching=true)
+      result = set_watcher_without_journal(user, watching)
+      self.add_watcher_journal((watching ? :label_watcher_user_add : :label_watcher_user_remove), user.name)
+      result
     end
   end
 end

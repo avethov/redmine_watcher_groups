@@ -1,5 +1,9 @@
 # English strings go here for Rails i18n
 en:
-  my_label: "My label"
   label_issue_watcher_groups: "Watcher Groups"
   label_group_search: "Search for group:"
+  label_watcher_user_add: "'%{name}' added user(s) '%{target_name}' to watchers"
+  label_watcher_user_remove: "'%{name}' removed user(s) '%{target_name}' from watchers"
+  label_watcher_group_add: "'%{name}' added group(s) '%{target_name}' to watchers"
+  label_watcher_group_remove: "'%{name}' removed group(s) '%{target_name}' from watchers"
+  label_watcher_change_setlog: "Log in issue history? "

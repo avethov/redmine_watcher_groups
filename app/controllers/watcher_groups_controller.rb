@@ -19,13 +19,19 @@ class WatcherGroupsController < ApplicationController
           @watched.set_watcher_group(group, true)
           find_watcher_users = find_watcher_users | group.users
         end
-        if find_watcher_users.any? and Redmine::Plugin.installed? :redmine_advanced_issue_history
-          notes = []
-          find_watcher_users.each do |user|
-            notes.append("Watcher #{user.name} was added")
-          end
-          add_system_journal(notes, issue)
-        end
+        if find_watcher_users.any?
+	  if Setting['plugin_redmine_watcher_groups']['redmine_watcher_groups_log_watchers_setting'] == 'yes'
+	    if Redmine::Plugin.installed? :redmine_advanced_issue_history
+	      notes = []
+	      find_watcher_users.each do |user|
+	        notes.append("Watcher #{user.name} was added")
+	      end
+	      add_system_journal(notes, issue)
+	    else
+	      issue.add_watcher_journal(:label_watcher_group_add, group_ids.flatten.compact.uniq.collect { |group_id| Group.find(group_id).name }.join(", "))
+	    end
+	  end
+	end
       end
     end
     respond_to do |format|
@@ -49,12 +55,16 @@ class WatcherGroupsController < ApplicationController
         issue = Issue.find(params[:object_id])
         group_users = group.users
         if group_users.any?
-          if Redmine::Plugin.installed? :redmine_advanced_issue_history
-            notes = []
-            group_users.each do |user|
-              notes.append("Watcher #{user.name} was removed")
-            end
-            add_system_journal(notes, issue)
+	  if Setting['plugin_redmine_watcher_groups']['redmine_watcher_groups_log_watchers_setting'] == 'yes'
+	    if Redmine::Plugin.installed? :redmine_advanced_issue_history
+	      notes = []
+	      group_users.each do |user|
+		notes.append("Watcher #{user.name} was removed")
+	      end
+	      add_system_journal(notes, issue)
+	    else
+	      issue.add_watcher_journal(:label_watcher_group_remove, group.name)
+	    end
           end
         end
       end
