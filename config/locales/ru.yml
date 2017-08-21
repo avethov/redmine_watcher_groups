@@ -1,0 +1,3 @@
+ru:  
+  label_watcher_change_setlog: "Делать запись в журнал? "
+  label_watcher_change_setlog_description: "Измнение будет внесено в журнал данного документа"

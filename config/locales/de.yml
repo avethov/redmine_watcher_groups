@@ -3,3 +3,5 @@ de:
   my_label: "Meine Kennung"
   label_issue_watcher_groups: "Beobachtergruppen"
   label_group_search: "Suche nach Gruppe:"
+  label_watcher_change_setlog: "Änderung in Issue-History loggen? "
+  label_watcher_change_setlog_description: "Alle Änderungen werden in der Bearbeitungshistorie des Tickets nachvollziehbar geloggt"

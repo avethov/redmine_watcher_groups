@@ -1,0 +1,3 @@
+tr:
+  label_watcher_change_setlog: "Tarihçeye kayıt? "
+  label_watcher_change_setlog_description: "Evet seçilirse bu değişikliğin kimin tarafından ne zaman yapıldığı işin tarihçesine eklenir."
