@@ -21,8 +21,10 @@ module WatcherGroupsIssuePatch
     }
 
     def add_watcher_journal(action, watcher_name)
-      journal = self.init_journal(User.current, l(action, :name => User.current.name, :target_name => watcher_name).html_safe)
-      journal.save
+      if Setting['plugin_redmine_watcher_groups']['redmine_watcher_groups_log_watchers_setting'] == 'yes'
+	journal = self.init_journal(User.current, l(action, :name => User.current.name, :target_name => watcher_name).html_safe)
+	journal.save
+      end
     end
 
     def watcher_groups
