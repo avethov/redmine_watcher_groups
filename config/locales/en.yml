@@ -7,3 +7,4 @@ en:
   label_watcher_group_add: "'%{name}' added group(s) '%{target_name}' to watchers"
   label_watcher_group_remove: "'%{name}' removed group(s) '%{target_name}' from watchers"
   label_watcher_change_setlog: "Log in issue history? "
+  label_watcher_change_setlog_description: "Changes will be logged in history of that issue"

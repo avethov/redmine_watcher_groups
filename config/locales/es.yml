@@ -1,0 +1,3 @@
+es:
+  label_watcher_change_setlog: "¿Registrar en el historial de la petición? "
+  label_watcher_change_setlog_description: "Los cambios serán registrados en el historial de la petición"

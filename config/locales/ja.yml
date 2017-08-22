@@ -7,3 +7,4 @@ ja:
   label_watcher_group_add: "「%{name}」がグループ「%{target_name}」をウォッチャーに追加しました"
   label_watcher_group_remove: "「%{name}」がグループ「%{target_name}」をウォッチャーから外しました"
   label_watcher_change_setlog: "チケット履歴に記録しますか？ "
+  label_watcher_change_setlog_description: "変更はそのチケット履歴に記録されます"
