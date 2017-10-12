@@ -1,3 +1,9 @@
-ru:  
-  label_watcher_change_setlog: "Делать запись в журнал? "
+ru:
+  label_issue_watcher_groups: "Группы наблюдателей"
+  label_group_search: "Поиск группы:"
+  label_watcher_user_add: "'%{name}' добавил пользователя(лей) '%{target_name}' в наблюдатели"
+  label_watcher_user_remove: "'%{name}' удалил пользователя(лей) '%{target_name}' из наблюдателей"
+  label_watcher_group_add: "'%{name}' добавил группу(ы) '%{target_name}' в наблюдатели"
+  label_watcher_group_remove: "'%{name}' удалил группу(ы) '%{target_name}' из наблюдателей"
+  label_watcher_change_setlog: "Делать запись в журнал?"
   label_watcher_change_setlog_description: "Измнение будет внесено в журнал данного документа"
